@@ -1,0 +1,75 @@
+﻿@using Return.Models
+@{
+    ViewBag.Title = "StudentEnrollment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<User> users = ViewBag.User as List<User>;
+    List<Class> classes = ViewBag.Class as List<Class>;
+    List<Section> sections = ViewBag.Section as List<Section>;
+
+}
+
+<h2>StudentEnrollment</h2>
+
+
+<div class="container">
+    <div class="col-lg-4 col-lg-push-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-h">Add Student</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/Admin/StudentEnrollment" method="post">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="userid">Student:</label>
+                        <div class="col-sm-9">
+                            <select name="StudentId" class="form-control">
+                                @foreach (var item in users)
+                                {
+                                    <option value="@item.Id"> @item.FirstName </option>
+
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="classid">Class:</label>
+                        <div class="col-sm-9">
+                            <select name="ClassId" class="form-control">
+                                @foreach (var item in classes)
+                                {
+                                    <option value="@item.Id"> @item.Name </option>
+
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="secid">SectionId:</label>
+                        <div class="col-sm-9">
+                            <select name="SectionId" class="form-control">
+                                @foreach (var item in sections)
+                                {
+                                    <option value="@item.Id"> @item.Name </option>
+
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10 ">
+                            <button type="submit" class="btn btn-info">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+﻿@using Return.Models
+@model  Class
+
+@{
+    ViewBag.Title = "EditClassroom";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<h2>Edit Classroom</h2>
+
+<div class="container">
+    <div class="col-lg-6 col-lg-push-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">Edit Classroom</div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/Admin/EditClassroom" method="post">
+                    <input type="hidden" class="form-control" name="Id" value="@Model.Id">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="classn">Class:</label>
+                        <div class="col-sm-9"> <input type="text" class="form-control" id="classn" placeholder="Class" required name="Name" value="@Model.Name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="sec">Section Id:</label>
+                        <div class="col-sm-9"><input type="text" class="form-control " id="sec" placeholder="Section" required name="SectionId" value="@Model.SectionId"></div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <a class="btn btn-info " href="/Admin/ManageClassrooms">Back</a>
+                        <button type="submit" class="btn btn-success save-changes-btn">Save Changes</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

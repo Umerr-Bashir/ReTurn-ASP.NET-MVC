@@ -1,0 +1,67 @@
+﻿/*==============Admin=============*/
+.navbar-brand{
+    color:white !important;
+    font-family:'Times New Roman', Times, serif;
+    font-weight:500;
+    font-size:22px !important;
+}
+.navbar-left li a {
+    padding: 18px 20px !important;
+}
+
+.navbar-right li a:first-child {
+    padding: 18px 20px;
+}
+.log-out-btn{
+    padding: 10px 13px !important;
+    margin-top: 7px !important;
+    color: white !important;
+    background-color:red !important;
+}
+.log-out-btn:hover{
+    background-color:#d9534f !important;
+}
+.panel-h {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.add-btn{
+    float:right;
+    padding: 0px 5px;
+}
+.action-btn{
+    padding:1px 14px;
+    margin:2px 9px;
+}
+.cursor-none {
+    pointer-events: none;
+}
+
+.sections-li{
+    display:inline-block;
+    background-color: #c9e2f4;
+    border:2px solid #12319c;
+    border-radius:5px;
+    padding: 5px 15px;
+}
+
+
+
+
+
+body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+

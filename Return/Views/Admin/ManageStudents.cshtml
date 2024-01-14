@@ -1,0 +1,53 @@
+﻿@using Return.Models
+@model List<StudentClassEnrollment>  
+@{
+    ViewBag.Title = "ManageStudents";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid table-responsive">
+    <div>
+        <h2>Enrolled Students</h2>@*//////////Change TO StudentEnrollment Table*@
+        <a href="/Admin/StudentEnrollment" class="btn btn-warning add-btn">Student Enrollment</a>
+
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Class</th>
+                <th>Section</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Student.FirstName</td>
+                    <td>@item.Student.LastName</td>
+                    <td>@item.Class.Name</td>
+                    <td>@item.Section.Name</td>
+                    <td class="text-center action-btn-div">
+                        <a class="btn btn-info btn-sm" href="/Admin/View/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View</a>
+                        <a class="btn btn-primary btn-sm" href="/Admin/Edit/@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <a class="btn btn-danger btn-sm" href="/Admin/DeleteEnrolledStudent/@item.Id"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+

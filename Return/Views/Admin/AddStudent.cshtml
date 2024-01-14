@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Add Student</h2>
+
+<div class="container">
+    <div class="col-lg-4 col-lg-push-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-h">Add Student</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/Admin/AddStudent" method="post">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="userid">UserId:</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="userid" placeholder="User Id" required name="UserId"></div>
+                    </div>
+                    @*<div class="form-group">
+                        <label class="control-label col-sm-2" for="classid">UserId:</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="classid" placeholder="Class Id" required name="ClassId"></div>
+                    </div>*@
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10 ">
+                            <button type="submit" class="btn btn-info">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

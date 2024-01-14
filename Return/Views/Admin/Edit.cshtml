@@ -1,0 +1,66 @@
+﻿@using Return.Models
+@model  User
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<Role> roles = ViewBag.Role as List<Role>;
+}
+
+
+<h2>Edit User</h2>
+<div class="container">
+    <div class="col-lg-6 col-lg-push-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">User Data</div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/Admin/Edit" method="post">
+                    <input type="hidden" class="form-control" name="Id" value="@Model.Id">
+                    <div class="form-group text-center">
+                        <img class="img-responsive img-thumbnail" src="~/Images/user.png" height="140" width="140" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="fname">First Name:</label>
+                        <div class="col-sm-9"> <input type="text" class="form-control" id="fname" placeholder="First Name" required name="FirstName" value="@Model.FirstName"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="lname">Last Name:</label>
+                        <div class="col-sm-9"><input type="text" class="form-control " id="lname" placeholder="Last Name" required name="LastName" value="@Model.LastName"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="pass">Password:</label>
+                        <div class="col-sm-9"><input type="password" class="form-control" id="pass" placeholder="Password" required name="Password" value="@Model.Password"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="email">Email</label>
+                        <div class="col-sm-9"><input type="email" class="form-control " id="email" placeholder="Email.." required name="Email" value="@Model.Email"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="cnic">CNIC Number:</label>
+                        <div class="col-sm-9"><input type="text" class="form-control " id="cnic" placeholder="CNIC.." required name="CNICNumber" value="@Model.CNICNumber"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="addrs">Address:</label>
+                        <div class="col-sm-9"><input type="text" class="form-control " id="addrs" placeholder="Address" required name="Address" value="@Model.Address"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Role:</label>
+                        <select name="RoleId" class="form-control">
+                            @foreach (var item in roles)
+                            {
+                                <option value = "@item.Id" > @item.Name </option>
+                                
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <a class="btn btn-info " href="/Admin/Dashboard">Back</a>
+                        <button type="submit" class="btn btn-success save-changes-btn">Save Changes</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
