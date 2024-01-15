@@ -226,6 +226,7 @@
     <Content Include="Views\Admin\EditClassroom.cshtml" />
     <Content Include="Views\Admin\AddStudent.cshtml" />
     <Content Include="Views\Admin\StudentEnrollment.cshtml" />
+    <Content Include="Views\Admin\EnrolledStudentEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

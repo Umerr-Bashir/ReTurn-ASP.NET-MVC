@@ -83,7 +83,26 @@ namespace Return.Controllers
             
             return Redirect("/Admin/Dashboard");
         }
+        [HttpGet]
+        public ActionResult EnrolledStudentEdit(int Id)
+        {
+            ViewBag.User = db.Users.Where(x => x.RoleId == 3).ToList();
+            ViewBag.Class = db.Classes.ToList();
+            ViewBag.Section = db.Sections.ToList();
+            StudentClassEnrollment dbStudentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == Id).FirstOrDefault();
+            return View(dbStudentClassEnrollment);
+        }
+        [HttpPost]
+        public ActionResult EnrolledStudentEdit(StudentClassEnrollment studentClassEnrollment)
+        {
+            StudentClassEnrollment dbStudentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == studentClassEnrollment.Id).FirstOrDefault();
 
+            dbStudentClassEnrollment.ClassId = studentClassEnrollment.ClassId;
+            dbStudentClassEnrollment.SectionId = studentClassEnrollment.SectionId;
+            db.SaveChanges();
+
+            return Redirect("/Admin/Dashboard");
+        }
 
         //==================================ManageTeachers=====================================
         public ActionResult ManageTeachers(User user)
@@ -123,8 +142,8 @@ namespace Return.Controllers
         }
         public ActionResult DeleteEnrolledStudent(int Id)
         {
-            StudentClassEnrollment enrolledStudent = db.StudentClassEnrollments.Where(x => x.StudentId == Id).FirstOrDefault();
-            db.StudentClassEnrollments.Remove(enrolledStudent);
+            StudentClassEnrollment studentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == Id).FirstOrDefault();
+            db.StudentClassEnrollments.Remove(studentClassEnrollment);
             db.SaveChanges();
             return Redirect("/Admin/ManageStudents"); ////Implement js to show alert
         }
