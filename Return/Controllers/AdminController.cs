@@ -135,7 +135,6 @@ namespace Return.Controllers
             {
                 return Redirect("/Account/Login");
             }
-            //List<User> users = db.Users.Where(x=>x.RoleId==3).ToList();
             List<StudentClassEnrollment> studentClassEnrollments = db.StudentClassEnrollments.ToList();
 
             return View(studentClassEnrollments);
@@ -180,12 +179,11 @@ namespace Return.Controllers
             db.SaveChanges();
             return Redirect("/Admin/ManageClassrooms");
         }
-        //public ActionResult ViewClassroom(int Id)
-        //{
-        //    //User user = db.users.Where(x => x.Id == Id && x.user == class.id).FirstOrDefault();////////////////Fix this 
-        //    Class @class = db.classes.Where(x => x.Id == Id && x.).FirstOrDefault();
-        //    return View();
-        //}
+        public ActionResult ViewClassroom(int Id)
+        {
+            List<StudentClassEnrollment> studentClassEnrollment = db.StudentClassEnrollments.Where(x => x.SectionId==Id).ToList();
+            return View(studentClassEnrollment);
+        }
         public ActionResult DeleteClassroom(int Id)
         {
             Section section = db.Sections.Where(x => x.Id == Id).FirstOrDefault();

@@ -12,7 +12,7 @@
     <div>
         <h2>Class Rooms</h2>
         <div>
-            <a href="/Admin/AddClass" class="btn btn-success add-btn">Add Class</a>
+            <a href="/Admin/AddClass" class="btn btn-warning add-btn">Add Class</a>
             <a href="/Admin/AddToSection" class="btn btn-info add-btn">Add To Section</a>
             
         </div>
@@ -24,6 +24,7 @@
             <tr>
                 <th>Class</th>
                 <th>Section</th>
+                <th>Class Incharge</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -33,8 +34,10 @@
                 <tr>
                     <td>@item.Class.Name</td>
                     <td>@item.Name</td>
+                    <td></td>
                     <td class="text-center action-btn-div">
-                        <a class="btn btn-info btn-sm" href="/Admin/ViewClassroom/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View</a>
+                        <a class="btn btn-info btn-sm" href="/Admin/ViewClassroom/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View Students</a>
+                        <a class="btn btn-success btn-sm" href="/Admin/ViewClassroom/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View Lectures</a>
                         <a class="btn btn-primary btn-sm" href="/Admin/EditClassroom/@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                         <a class="btn btn-danger btn-sm" href="/Admin/DeleteClassroom/@item.Id"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                     </td>

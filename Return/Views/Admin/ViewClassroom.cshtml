@@ -1,46 +1,52 @@
-﻿
-@using Return.Models
-@model Class
-
+﻿@using Return.Models
+@model List<StudentClassEnrollment>
 @{
     ViewBag.Title = "ViewClassroom";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
-<h2>View Classroom</h2>
-<div class="container">
-    <div class="col-lg-6 col-lg-push-3">
-        <div class="panel panel-info">
-            <div class="panel-heading">User Data</div>
-            <div class="panel-body">
-                <form class="form-horizontal" action="/Admin/ViewClassroom">
-                    <input type="hidden" class="form-control" disabled value="@Model.Id">
-                    
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="classn">Class:</label>
-                        <div class="col-sm-9"> <input type="text" class="form-control cursor-none" id="classn" placeholder="First Name" disabled required name="FirstName" value="@Model.Name"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="sec">Section:</label>
-                        <div class="col-sm-9"><input type="text" class="form-control cursor-none" id="sec" placeholder="Section Id" disabled required name="SectionId" value="@Model.Section.Name"></div>
-                    </div>
-                    
-
-                    <div class="text-center">
-                        <a class="btn btn-info " href="/Admin/ManageClassrooms">Back</a>
-                        <a class="btn btn-primary" href="/Admin/EditClassroom/@Model.Id">Edit</a>
-
-
-
-
-
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="container-fluid table-responsive">
+    <div>
+        <h2>Enrolled Students</h2>
     </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Class</th>
+                <th>Section</th>
+                <th>Class Incharge</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Student.FirstName</td>
+                    <td>@item.Student.LastName</td>
+                    <td>@item.Class.Name</td>
+                    <td>@item.Section.Name</td>
+                    <td></td>
+                    <td class="text-center action-btn-div">
+                        <a class="btn btn-info btn-sm" href="/Admin/View/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View</a>
+                        <a class="btn btn-primary btn-sm" href="/Admin/EnrolledStudentEdit/@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <a class="btn btn-danger btn-sm" href="/Admin/DeleteEnrolledStudent/@item.Id"><span class="glyphicon glyphicon-trash"></span> Remove</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
 </div>
+
+
+
+
+
 
 
 
