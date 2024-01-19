@@ -150,7 +150,35 @@ namespace Return.Controllers
         public ActionResult ManageClassrooms()
         {
             List<Section> sections = db.Sections.ToList();
-            return View(sections);
+            List<User> teacher = db.Users.Where(x => x.RoleId == 2).ToList();
+            List<ClassIncharge> classIncharges = db.ClassIncharges.ToList();
+
+            List<ClassInchargeViewModels> classInchargeViewModels = new List<ClassInchargeViewModels>();
+
+            foreach (var section in sections)
+            {
+                ClassIncharge classIncharge = db.ClassIncharges.Where(x=>x.SectionId==section.Id).FirstOrDefault();
+                ClassInchargeViewModels civm = new ClassInchargeViewModels
+                {
+                    SectionId = section.Id,
+                    SectionName = section.Name,
+                    ClassName = section.Class.Name
+
+                };
+                if (classIncharge!=null)
+                {
+                    var teachers = teacher.Where(x => x.Id == classIncharge.TeacherId).FirstOrDefault();
+                    civm.FirstName = teachers.FirstName ?? "NA";
+                    civm.LastName = teachers.LastName ?? "NA";
+                }
+                else
+                {
+                    civm.FirstName = "NA";
+                }
+                classInchargeViewModels.Add(civm);
+                
+            }
+            return View(classInchargeViewModels);
         }
         //===================ACTIONS==================
         [HttpGet]
@@ -215,7 +243,50 @@ namespace Return.Controllers
             db.SaveChanges();
             return Redirect("/Admin/ManageClassrooms");
         }
+        public ActionResult ViewLectures(int id)
+        {
+            List<Subject> subjects = db.Subjects.Where(x => x.SectionId == id).ToList();
+            return View(subjects);
+        }
+        [HttpGet]
+        public ActionResult AddLecture()
+        {
+            ViewBag.User = db.Users.Where(x => x.RoleId == 2).ToList();
+            ViewBag.Section = db.Sections.ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddLecture(Subject subject)
+        {
+            db.Subjects.Add(subject);
+            db.SaveChanges();
 
+            return Redirect("/Admin/ManageClassrooms");
+        }
+        public ActionResult DeleteLecture(int id)
+        {
+            Subject subject = db.Subjects.Where(x=>x.Id == id).FirstOrDefault();
+            db.Subjects.Remove(subject);
+            db.SaveChanges();
+
+            return Redirect("/Admin/ManageClassrooms");
+        }
+
+        [HttpGet]
+        public ActionResult AssignClassIncharge()
+        {
+            ViewBag.User = db.Users.Where(x => x.RoleId == 2).ToList();
+            ViewBag.Section = db.Sections.ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AssignClassIncharge(ClassIncharge classIncharge)
+        {
+            db.ClassIncharges.Add(classIncharge);
+            db.SaveChanges();
+
+            return Redirect("/Admin/ManageClassrooms");
+        }
 
         [HttpGet]
         public ActionResult StudentEnrollment()

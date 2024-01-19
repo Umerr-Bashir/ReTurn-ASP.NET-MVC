@@ -196,14 +196,23 @@
     <Compile Include="Migrations\202401130947005_chngs.designer.cs">
       <DependentUpon>202401130947005_chngs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401160132578_subjdbset.cs" />
+    <Compile Include="Migrations\202401160132578_subjdbset.designer.cs">
+      <DependentUpon>202401160132578_subjdbset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401160244343_int2strng.cs" />
+    <Compile Include="Migrations\202401160244343_int2strng.designer.cs">
+      <DependentUpon>202401160244343_int2strng.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ClassIncharge.cs" />
-    <Compile Include="Models\ClassStudentViewModel.cs" />
+    <Compile Include="Models\ClassInchargeViewModels.cs" />
     <Compile Include="Models\ReturnContext.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\StudentClassEnrollment.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -227,6 +236,9 @@
     <Content Include="Views\Admin\AddStudent.cshtml" />
     <Content Include="Views\Admin\StudentEnrollment.cshtml" />
     <Content Include="Views\Admin\EnrolledStudentEdit.cshtml" />
+    <Content Include="Views\Admin\ViewLectures.cshtml" />
+    <Content Include="Views\Admin\AddLecture.cshtml" />
+    <Content Include="Views\Admin\AssignClassIncharge.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -282,6 +294,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401130947005_chngs.resx">
       <DependentUpon>202401130947005_chngs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401160132578_subjdbset.resx">
+      <DependentUpon>202401160132578_subjdbset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401160244343_int2strng.resx">
+      <DependentUpon>202401160244343_int2strng.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

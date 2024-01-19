@@ -1,0 +1,71 @@
+﻿@using Return.Models
+
+@{
+    ViewBag.Title = "AddLecture";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<User> users = ViewBag.User as List<User>;
+    List<Section> sections = ViewBag.Section as List<Section>;
+}
+
+
+<h2>Add Lecture</h2>
+
+<div class="container">
+    <div class="col-lg-6 col-lg-push-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-h">Add Lecture</h3>
+            </div>
+            <div class="panel-body">
+
+                <form class="form-horizontal" action="/Admin/AddLecture" method="post" style="margin-top:50px">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="subj">Subject Name:</label>
+                        <div class="col-sm-9"> <input type="text" class="form-control" id="subj" placeholder="Subject Name" required name="Name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="class">Teacher:</label>
+                        <div class="col-sm-9">
+                            <select name="TeacherId" class="form-control">
+                                @foreach (var item in users)
+                                {
+                                    <option value="@item.Id">@item.FirstName @item.LastName</option>
+
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="class">Class:</label>
+                        <div class="col-sm-9">
+                            <select name="SectionId" class="form-control">
+                                @foreach (var item in sections)
+                                {
+                                    <option value="@item.Id"> @item.Class.Name - @item.Name  </option>
+
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-10 ">
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+

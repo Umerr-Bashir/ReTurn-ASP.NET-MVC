@@ -24,6 +24,7 @@ namespace Return.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
         public DbSet<ClassIncharge> ClassIncharges { get; set; }
         public DbSet<StudentClassEnrollment> StudentClassEnrollments { get; set; }
 

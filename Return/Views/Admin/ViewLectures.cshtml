@@ -1,0 +1,53 @@
+﻿@using Return.Models
+@model List<Subject>
+
+
+@{
+    ViewBag.Title = "ViewLectures";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid table-responsive">
+    <div>
+        <h2>Lectures</h2>
+        <div>
+            <a href="/Admin/AddLecture" class="btn btn-warning add-btn">Add a Lecture</a>
+
+        </div>
+
+
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Teacher</th>
+                <th>Subject</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Teacher.FirstName @item.Teacher.LastName</td>
+                    <td>@item.Name</td>
+                    <td class="text-center action-btn-div">
+                        <a class="btn btn-primary btn-sm" href="/Admin/EditLecture/@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <a class="btn btn-danger btn-sm" href="/Admin/DeleteLecture/@item.Id"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+
+
