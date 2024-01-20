@@ -214,8 +214,14 @@ namespace Return.Controllers
         }
         public ActionResult DeleteClassroom(int Id)
         {
+            //List<ClassIncharge> classIncharges = db.ClassIncharges.ToList();
+            //ClassIncharge classIncharge = db.ClassIncharges.Where(x => x.SectionId == Id).FirstOrDefault();
+
+
+            ClassIncharge classIncharges = db.ClassIncharges.Where(x => x.SectionId == Id).FirstOrDefault();
             Section section = db.Sections.Where(x => x.Id == Id).FirstOrDefault();
             db.Sections.Remove(section);
+            db.ClassIncharges.Remove(classIncharges);
             db.SaveChanges();
             return Redirect("/Admin/ManageClassrooms"); ////Implement js to show alert
         }
