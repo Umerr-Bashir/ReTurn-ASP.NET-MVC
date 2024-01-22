@@ -3,7 +3,7 @@
     ViewBag.Title = "StudentEnrollment";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     List<User> users = ViewBag.User as List<User>;
-    List<Class> classes = ViewBag.Class as List<Class>;
+    //List<Class> classes = ViewBag.Class as List<Class>;
     List<Section> sections = ViewBag.Section as List<Section>;
 
 }
@@ -33,7 +33,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label class="control-label col-sm-2" for="classid">Class:</label>
                         <div class="col-sm-9">
                             <select name="ClassId" class="form-control">
@@ -45,14 +45,14 @@
 
                             </select>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="secid">SectionId:</label>
                         <div class="col-sm-9">
                             <select name="SectionId" class="form-control">
                                 @foreach (var item in sections)
                                 {
-                                    <option value="@item.Id"> @item.Name </option>
+                                    <option value="@item.Id">@item.Class.Name - @item.Name </option>
 
                                 }
 

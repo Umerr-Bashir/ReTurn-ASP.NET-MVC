@@ -204,6 +204,10 @@
     <Compile Include="Migrations\202401160244343_int2strng.designer.cs">
       <DependentUpon>202401160244343_int2strng.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401201510262_rmcid.cs" />
+    <Compile Include="Migrations\202401201510262_rmcid.designer.cs">
+      <DependentUpon>202401201510262_rmcid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ClassIncharge.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401160244343_int2strng.resx">
       <DependentUpon>202401160244343_int2strng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401201510262_rmcid.resx">
+      <DependentUpon>202401201510262_rmcid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -93,16 +93,17 @@ namespace Return.Controllers
             return View(dbStudentClassEnrollment);
         }
         [HttpPost]
-        public ActionResult EnrolledStudentEdit(StudentClassEnrollment studentClassEnrollment)
-        {
-            StudentClassEnrollment dbStudentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == studentClassEnrollment.Id).FirstOrDefault();
+        // error occured after classId removed from studentclassenroll table
+        //public ActionResult EnrolledStudentEdit(StudentClassEnrollment studentClassEnrollment)
+        //{
+        //    StudentClassEnrollment dbStudentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == studentClassEnrollment.Id).FirstOrDefault();
 
-            dbStudentClassEnrollment.ClassId = studentClassEnrollment.ClassId;
-            dbStudentClassEnrollment.SectionId = studentClassEnrollment.SectionId;
-            db.SaveChanges();
+        //    dbStudentClassEnrollment.ClassId = studentClassEnrollment.ClassId;
+        //    dbStudentClassEnrollment.SectionId = studentClassEnrollment.SectionId;
+        //    db.SaveChanges();
 
-            return Redirect("/Admin/Dashboard");
-        }
+        //    return Redirect("/Admin/Dashboard");
+        //}
 
         //==================================ManageTeachers=====================================
         public ActionResult ManageTeachers(User user)
@@ -119,7 +120,7 @@ namespace Return.Controllers
                 return Redirect("/Account/Login");
             }
             List<User> Users = db.Users.Where(x => x.RoleId == 2).ToList();
-            return View(Users);
+            return View();
         }
         //========================================ManageStudents===================================
         public ActionResult ManageStudents()
@@ -214,12 +215,10 @@ namespace Return.Controllers
         }
         public ActionResult DeleteClassroom(int Id)
         {
-            //List<ClassIncharge> classIncharges = db.ClassIncharges.ToList();
-            //ClassIncharge classIncharge = db.ClassIncharges.Where(x => x.SectionId == Id).FirstOrDefault();
-
-
+            List<StudentClassEnrollment> classEnrollments = db.StudentClassEnrollments.Where(x => x.SectionId == Id).ToList();
             ClassIncharge classIncharges = db.ClassIncharges.Where(x => x.SectionId == Id).FirstOrDefault();
             Section section = db.Sections.Where(x => x.Id == Id).FirstOrDefault();
+            db.StudentClassEnrollments.RemoveRange(classEnrollments);
             db.Sections.Remove(section);
             db.ClassIncharges.Remove(classIncharges);
             db.SaveChanges();
@@ -298,7 +297,7 @@ namespace Return.Controllers
         public ActionResult StudentEnrollment()
         {
             ViewBag.User = db.Users.Where(x => x.RoleId == 3).ToList(); 
-            ViewBag.Class = db.Classes.ToList(); 
+            //ViewBag.Class = db.Classes.ToList(); 
             ViewBag.Section = db.Sections.ToList(); 
             return View();
         }

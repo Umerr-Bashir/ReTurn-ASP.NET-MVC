@@ -9,7 +9,7 @@
 <div class="container-fluid table-responsive">
     <div>
         <h2>Manage Teachers</h2>
-        <a href="/Admin/AddTeacher" class="btn btn-info add-btn">Add Teacher</a>
+        @*<a href="/Admin/AddTeacher" class="btn btn-info add-btn">Add Teacher</a>*@
     </div>
     <table class="table table-bordered table-striped table-hover">
         <thead>
@@ -18,7 +18,6 @@
                 <th>Teacher</th>
                 <th>CNIC Number</th>
                 <th>Address</th>
-                <th>Class Incharge</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,8 +29,6 @@
                     <td>@item.FirstName @item.LastName</td>
                     <td>@item.CNICNumber</td>
                     <td>@item.Address</td>
-                    @*<td>@item.classincharge</td>*@
-                    <td></td>
                     <td class="text-center action-btn-div">
                         <a class="btn btn-info btn-sm" href="/Admin/View/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View</a>
                         <a class="btn btn-primary btn-sm" href="/Admin/Edit/@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
@@ -44,6 +41,8 @@
     </table>
 
 </div>
+
+
 
 
 
