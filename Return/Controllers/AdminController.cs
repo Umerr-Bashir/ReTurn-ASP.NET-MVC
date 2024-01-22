@@ -1,4 +1,5 @@
 ﻿using Return.Models;
+using Return.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Return.Controllers
                 return Redirect("/Account/Login");
             }
             List<User> Users = db.Users.ToList();
+
             return View(Users);
         }
 
@@ -58,6 +60,15 @@ namespace Return.Controllers
             db.Users.Remove(user);
             db.SaveChanges();
             return Redirect("/Admin/Dashboard"); ////Implement js to show alert
+        }
+        public ActionResult DeleteTeacher(int Id)
+        {
+            User user = db.Users.Where(x => x.Id == Id).FirstOrDefault();
+            ClassIncharge classIncharge = db.ClassIncharges.Where(x => x.TeacherId == Id).FirstOrDefault();
+            db.ClassIncharges.Remove(classIncharge);
+            user.RoleId = 3;
+            db.SaveChanges();
+            return RedirectToAction("ManageTeachers", "Admin"); ////Implement js to show alert
         }
 
         [HttpGet]
@@ -93,21 +104,47 @@ namespace Return.Controllers
             return View(dbStudentClassEnrollment);
         }
         [HttpPost]
-        // error occured after classId removed from studentclassenroll table
-        //public ActionResult EnrolledStudentEdit(StudentClassEnrollment studentClassEnrollment)
-        //{
-        //    StudentClassEnrollment dbStudentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == studentClassEnrollment.Id).FirstOrDefault();
+        public ActionResult EnrolledStudentEdit(StudentClassEnrollment studentClassEnrollment)
+        {
+            StudentClassEnrollment dbStudentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == studentClassEnrollment.Id).FirstOrDefault();
+            dbStudentClassEnrollment.SectionId = studentClassEnrollment.SectionId;
+            db.SaveChanges();
 
-        //    dbStudentClassEnrollment.ClassId = studentClassEnrollment.ClassId;
-        //    dbStudentClassEnrollment.SectionId = studentClassEnrollment.SectionId;
-        //    db.SaveChanges();
-
-        //    return Redirect("/Admin/Dashboard");
-        //}
+            return Redirect("/Admin/Dashboard");
+        }
 
         //==================================ManageTeachers=====================================
+
         public ActionResult ManageTeachers(User user)
         {
+            List<User> teachers = db.Users.Where(x => x.RoleId == 2).ToList();
+            List<ClassIncharge> classIncharges = db.ClassIncharges.ToList();
+
+            List<TeacherInchargeViewModel> teacherInchargeViewModels = new List<TeacherInchargeViewModel>();
+
+            foreach (var teacher in teachers)
+            {
+                User user1 = db.Users.Where(x => x.Id == teacher.Id).FirstOrDefault();
+                TeacherInchargeViewModel tivm = new TeacherInchargeViewModel
+                {
+                    TeacherId = teacher.Id,
+                    FirstName = teacher.FirstName,
+                    LastName = teacher.LastName,
+                    Address = teacher.Address,
+                    CNICNumber = teacher.CNICNumber,
+                };
+                if (user1 != null)
+                {
+                    var classIncharge = db.ClassIncharges.Where(x => x.TeacherId == teacher.Id).FirstOrDefault();
+                    tivm.Section = classIncharge?.Section.Name ?? "NA";
+                    tivm.Class = classIncharge?.Section.Class.Name ?? "NA";
+                }
+                else
+                {
+                    tivm.Section = "NA";
+                }
+                teacherInchargeViewModels.Add(tivm);
+            }
             string accessToken = "";
             if (Request.Cookies.Get("user-access-token") != null)
             {
@@ -117,10 +154,9 @@ namespace Return.Controllers
 
             if (dbUser == null)
             {
-                return Redirect("/Account/Login");
+                return RedirectToAction("Login", "Account");
             }
-            List<User> Users = db.Users.Where(x => x.RoleId == 2).ToList();
-            return View();
+            return View(teacherInchargeViewModels);
         }
         //========================================ManageStudents===================================
         public ActionResult ManageStudents()
@@ -154,12 +190,12 @@ namespace Return.Controllers
             List<User> teacher = db.Users.Where(x => x.RoleId == 2).ToList();
             List<ClassIncharge> classIncharges = db.ClassIncharges.ToList();
 
-            List<ClassInchargeViewModels> classInchargeViewModels = new List<ClassInchargeViewModels>();
+            List<ClassInchargeViewModel> classInchargeViewModels = new List<ClassInchargeViewModel>();
 
             foreach (var section in sections)
             {
                 ClassIncharge classIncharge = db.ClassIncharges.Where(x=>x.SectionId==section.Id).FirstOrDefault();
-                ClassInchargeViewModels civm = new ClassInchargeViewModels
+                ClassInchargeViewModel civm = new ClassInchargeViewModel
                 {
                     SectionId = section.Id,
                     SectionName = section.Name,
