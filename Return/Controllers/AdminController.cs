@@ -53,10 +53,10 @@ namespace Return.Controllers
             return View(users);
         }
 
-	
+
         public ActionResult Delete(int Id)
         {
-            User user = db.Users.Where(x=>x.Id == Id).FirstOrDefault();
+            User user = db.Users.Where(x => x.Id == Id).FirstOrDefault();
             db.Users.Remove(user);
             db.SaveChanges();
             return Redirect("/Admin/Dashboard"); ////Implement js to show alert
@@ -76,7 +76,7 @@ namespace Return.Controllers
         {
             ViewBag.Role = db.Roles.ToList();
             User user = db.Users.Where(x => x.Id == Id).FirstOrDefault();
-            return View(user); 
+            return View(user);
         }
         [HttpPost]
         public ActionResult Edit(User user)
@@ -91,7 +91,7 @@ namespace Return.Controllers
             dbUser.Password = user.Password;
             dbUser.Address = user.Address;
             db.SaveChanges();
-            
+
             return Redirect("/Admin/Dashboard");
         }
         [HttpGet]
@@ -176,6 +176,11 @@ namespace Return.Controllers
 
             return View(studentClassEnrollments);
         }
+        public ActionResult ViewEnrolledStudent(int Id)
+        {
+            StudentClassEnrollment studentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == Id).FirstOrDefault();
+            return View(studentClassEnrollment);
+        }
         public ActionResult DeleteEnrolledStudent(int Id)
         {
             StudentClassEnrollment studentClassEnrollment = db.StudentClassEnrollments.Where(x => x.Id == Id).FirstOrDefault();
@@ -194,7 +199,7 @@ namespace Return.Controllers
 
             foreach (var section in sections)
             {
-                ClassIncharge classIncharge = db.ClassIncharges.Where(x=>x.SectionId==section.Id).FirstOrDefault();
+                ClassIncharge classIncharge = db.ClassIncharges.Where(x => x.SectionId == section.Id).FirstOrDefault();
                 ClassInchargeViewModel civm = new ClassInchargeViewModel
                 {
                     SectionId = section.Id,
@@ -202,7 +207,7 @@ namespace Return.Controllers
                     ClassName = section.Class.Name
 
                 };
-                if (classIncharge!=null)
+                if (classIncharge != null)
                 {
                     var teachers = teacher.Where(x => x.Id == classIncharge.TeacherId).FirstOrDefault();
                     civm.FirstName = teachers.FirstName ?? "NA";
@@ -213,7 +218,7 @@ namespace Return.Controllers
                     civm.FirstName = "NA";
                 }
                 classInchargeViewModels.Add(civm);
-                
+
             }
             return View(classInchargeViewModels);
         }
@@ -246,7 +251,7 @@ namespace Return.Controllers
         }
         public ActionResult ViewClassroom(int Id)
         {
-            List<StudentClassEnrollment> studentClassEnrollment = db.StudentClassEnrollments.Where(x => x.SectionId==Id).ToList();
+            List<StudentClassEnrollment> studentClassEnrollment = db.StudentClassEnrollments.Where(x => x.SectionId == Id).ToList();
             return View(studentClassEnrollment);
         }
         public ActionResult DeleteClassroom(int Id)
@@ -258,12 +263,12 @@ namespace Return.Controllers
             db.Sections.Remove(section);
             db.ClassIncharges.Remove(classIncharges);
             db.SaveChanges();
-            return Redirect("/Admin/ManageClassrooms"); ////Implement js to show alert
+            return Redirect("/Admin/ManageClassrooms"); ////Implement JS to Show Alert
         }
         [HttpGet]
         public ActionResult EditClassroom(int Id)
         {
-            Class @class= db.Classes.Where(x => x.Id == Id).FirstOrDefault();
+            Class @class = db.Classes.Where(x => x.Id == Id).FirstOrDefault();
             return View(@class);
         }
         [HttpPost]
@@ -272,11 +277,10 @@ namespace Return.Controllers
             Class dbClass = db.Classes.Where(x => x.Id == @class.Id).FirstOrDefault();
 
             dbClass.Name = @class.Name;
-            //dbClass.SectionId = @class.SectionId;
             db.SaveChanges();
             return Redirect("/Admin/ManageClassrooms");
         }
-        
+
         public ActionResult DeleteClass(int id)
         {
             Class @class = db.Classes.Where(x => x.Id == id).FirstOrDefault();
@@ -284,11 +288,39 @@ namespace Return.Controllers
             db.SaveChanges();
             return Redirect("/Admin/ManageClassrooms");
         }
-        public ActionResult ViewLectures(int id)
+        public ActionResult ViewLectures(int Id)
         {
-            List<Subject> subjects = db.Subjects.Where(x => x.SectionId == id).ToList();
-            return View(subjects);
+            List<Subject> subjects = db.Subjects.Where(x=>x.SectionId==Id).ToList();
+            List<User> teachers = db.Users.Where(x => x.RoleId == 2).ToList();
+
+            List<SubjectListSubjectViewModel> subjectListSubjectViewModels = new List<SubjectListSubjectViewModel>();
+
+            foreach (var subject in subjects)
+            {
+                SubjectListSubjectViewModel slsvm = new SubjectListSubjectViewModel
+                {
+                    Name = subject.Name,
+                    TeacherId = subject.TeacherId,
+                    SectionId = subject.Section.Id,
+                    SubjectId = subject.Id
+
+                };
+                if (teachers != null)
+                {
+                    User user = db.Users.Where(x => x.Id == subject.TeacherId).FirstOrDefault();
+                    slsvm.FirstName = user.FirstName ?? "NA";
+                    slsvm.LastName = user.LastName ?? "NA";
+                        
+                }
+                else
+                {
+                    slsvm.FirstName = "NA";
+                }
+                subjectListSubjectViewModels.Add(slsvm);
+            };
+            return View(subjectListSubjectViewModels);
         }
+
         [HttpGet]
         public ActionResult AddLecture()
         {
@@ -302,11 +334,11 @@ namespace Return.Controllers
             db.Subjects.Add(subject);
             db.SaveChanges();
 
-            return Redirect("/Admin/ManageClassrooms");
+            return RedirectToAction("ManageClassrooms", "Admin");
         }
         public ActionResult DeleteLecture(int id)
         {
-            Subject subject = db.Subjects.Where(x=>x.Id == id).FirstOrDefault();
+            Subject subject = db.Subjects.Where(x => x.Id == id).FirstOrDefault();
             db.Subjects.Remove(subject);
             db.SaveChanges();
 
@@ -332,9 +364,8 @@ namespace Return.Controllers
         [HttpGet]
         public ActionResult StudentEnrollment()
         {
-            ViewBag.User = db.Users.Where(x => x.RoleId == 3).ToList(); 
-            //ViewBag.Class = db.Classes.ToList(); 
-            ViewBag.Section = db.Sections.ToList(); 
+            ViewBag.User = db.Users.Where(x => x.RoleId == 3).ToList();
+            ViewBag.Section = db.Sections.ToList();
             return View();
         }
         [HttpPost]

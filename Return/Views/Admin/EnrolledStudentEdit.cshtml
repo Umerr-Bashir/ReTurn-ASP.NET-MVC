@@ -26,7 +26,7 @@
                     <input type="hidden" class="form-control" name="Id" value="@Model.Id">
                     
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="secid">SectionId:</label>
+                        <label class="control-label col-sm-3" for="secid">SectionId:</label>
                         <div class="col-sm-9">
                             <select name="SectionId" class="form-control">
                                 @foreach (var item in sections)
@@ -40,10 +40,11 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10 ">
+                        <div class="col-sm-push-5 col-sm-5 ">
                             <button type="submit" class="btn btn-info">Edit</button>
                         </div>
                     </div>
+                        <a href="/Admin/Edit/@Model.Student.Id" style="float:right;">Edit Student's Profile</a>
                 </form>
             </div>
         </div>

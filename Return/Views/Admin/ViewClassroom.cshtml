@@ -17,7 +17,6 @@
                 <th>Last Name</th>
                 <th>Class</th>
                 <th>Section</th>
-                <th>Class Incharge</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -29,9 +28,8 @@
                     <td>@item.Student.LastName</td>
                     <td>@item.Section.Class.Name</td>
                     <td>@item.Section.Name</td>
-                    <td></td>
                     <td class="text-center action-btn-div">
-                        <a class="btn btn-info btn-sm" href="/Admin/View/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View</a>
+                        <a class="btn btn-info btn-sm" href="/Admin/ViewEnrolledStudent/@item.Id"><spna class="glyphicon glyphicon-user"></spna> View</a>
                         <a class="btn btn-primary btn-sm" href="/Admin/EnrolledStudentEdit/@item.Id"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                         <a class="btn btn-danger btn-sm" href="/Admin/DeleteEnrolledStudent/@item.Id"><span class="glyphicon glyphicon-trash"></span> Remove</a>
                     </td>
