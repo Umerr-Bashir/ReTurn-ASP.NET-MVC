@@ -268,15 +268,20 @@ namespace Return.Controllers
         [HttpGet]
         public ActionResult EditClassroom(int Id)
         {
-            Class @class = db.Classes.Where(x => x.Id == Id).FirstOrDefault();
-            return View(@class);
+            ViewBag.Section = db.Sections.ToList();
+            ViewBag.ClassIncharge = db.ClassIncharges.ToList();
+            ClassIncharge classIncharge = db.ClassIncharges.Where(x=>x.SectionId==Id).FirstOrDefault();
+            return View(classIncharge);
         }
         [HttpPost]
-        public ActionResult EditClassroom(Class @class)
+        public ActionResult EditClassroom(ClassIncharge classIncharge)
         {
-            Class dbClass = db.Classes.Where(x => x.Id == @class.Id).FirstOrDefault();
+            
+            ClassIncharge dbClassIncharge = db.ClassIncharges.Where(x=>x.Id==classIncharge.Id).FirstOrDefault();
 
-            dbClass.Name = @class.Name;
+            dbClassIncharge.SectionId = classIncharge.SectionId;
+            //dbClassIncharge.Section.Name = classIncharge.Section.Name;
+            dbClassIncharge.TeacherId = classIncharge.TeacherId;
             db.SaveChanges();
             return Redirect("/Admin/ManageClassrooms");
         }

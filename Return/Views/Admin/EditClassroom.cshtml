@@ -1,9 +1,11 @@
 ﻿@using Return.Models
-@model  Class
+@model  ClassIncharge
 
 @{
     ViewBag.Title = "EditClassroom";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<Section> sections = ViewBag.Section as List<Section>;
+    List<ClassIncharge> classIncharges = ViewBag.ClassIncharge as List<ClassIncharge>;
 }
 
 
@@ -19,13 +21,32 @@
                     <input type="hidden" class="form-control" name="Id" value="@Model.Id">
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3" for="classn">Class:</label>
-                        <div class="col-sm-9"> <input type="text" class="form-control" id="classn" placeholder="Class" required name="Name" value="@Model.Name"></div>
+                        <label class="control-label col-sm-3" for="sec">Section:</label>
+                        <select name="SectionId" class="form-control">
+                            @foreach (var item in sections)
+                            {
+                                <option value="@item.Id" @(item.Id == Model.SectionId ? "selected" : "") >
+                                    @(item.Class.Name+ "-" +item.Name ?? "NA")
+                                </option>
+
+                            }
+
+                        </select>
                     </div>
+
+
                     <div class="form-group">
-                        <label class="control-label col-sm-3" for="sec">Section Id:</label>
-                        <div class="col-sm-9"><input type="text" class="form-control " id="sec" placeholder="Section" required name="SectionId" value="@Model.SectionId"></div>
+                        <label class="control-label col-sm-3" for="clsinch">Class Incharge:</label>
+                        <select name="TeacherId" class="form-control">
+                            @foreach (var item in classIncharges)
+                            {
+                                <option value="@item.Teacher.Id" @(item.Teacher.Id == Model.TeacherId ? "selected" : "")>
+                                    @(item.Teacher.FirstName+ " " +item.Teacher.LastName ?? "NA")
+                                </option>
+                            }
+                        </select>
                     </div>
+
 
                     <div class="form-group text-center">
                         <a class="btn btn-info " href="/Admin/ManageClassrooms">Back</a>
