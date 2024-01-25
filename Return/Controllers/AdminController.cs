@@ -261,6 +261,11 @@ namespace Return.Controllers
             Section section = db.Sections.Where(x => x.Id == Id).FirstOrDefault();
             db.StudentClassEnrollments.RemoveRange(classEnrollments);
             db.Sections.Remove(section);
+            if (classIncharges == null)
+            {
+                db.SaveChanges();
+                return Redirect("/Admin/ManageClassrooms");
+            }
             db.ClassIncharges.Remove(classIncharges);
             db.SaveChanges();
             return Redirect("/Admin/ManageClassrooms"); ////Implement JS to Show Alert
