@@ -47,8 +47,9 @@
                         <select name="RoleId" class="form-control">
                             @foreach (var item in roles)
                             {
-                                <option value = "@item.Id" > @item.Name </option>
-                                
+                                <option value="@item.Id" @(item.Id == Model.RoleId ? "selected" : "")>
+                                    @(item.Name)
+                                </option>
                             }
 
                         </select>

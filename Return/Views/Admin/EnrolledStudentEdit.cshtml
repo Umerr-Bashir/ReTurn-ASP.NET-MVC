@@ -31,8 +31,9 @@
                             <select name="SectionId" class="form-control">
                                 @foreach (var item in sections)
                                 {
-                                    <option value="@item.Id"> @item.Class.Name - @item.Name </option>
-
+                                    <option value="@item.Id" @(item.Id == Model.SectionId ? "selected" : "")>
+                                        @(item.Class.Name + " - " + item.Name ?? "NA")
+                                    </option>
                                 }
 
                             </select>
