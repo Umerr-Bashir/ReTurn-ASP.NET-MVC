@@ -9,25 +9,97 @@
 
 
 <div class="container-fluid table-responsive">
-        <h2>Lectures</h2>
+    <h2>Lectures</h2>
     <div>
         <a href="/Admin/AddLecture" class="btn btn-warning add-btn">Add a Lecture</a>
+        <a href="/Admin/AddDay" class="btn btn-danger add-btn">Add To Days</a>
+        <a href="/Admin/AddTime" class="btn btn-primary add-btn">Add To Timings</a>
 
     </div>
+    @*<table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>Day</th>
+            <th>9:30-10:20</th>
+            <th>10:20-11:10</th>
+            <th>11:10-12:00</th>
+            <th>12:00-12:40</th>
+            <th>12:40-1:30</th>
+            <th>1:30-2:20</th>
+            <th>2:20-3:10</th>
+            <th>3:10-4:00</th>
+        </tr>
+        <tr>
+            <td class="highlight"><b>Monday</b></td>
+            <td>Eng</td>
+            <td>Mat</td>
+            <td>Che</td>
+            <td rowspan="6" class="special"><b>LUNCH</b></td>
+            <td colspan="3" class="special">LAB</td>
+            <td>Phy</td>
+        </tr>
+        <tr>
+            <td class="highlight"><b>Tuesday</b></td>
+            <td colspan="3" class="special">LAB</td>
+            <td>Eng</td>
+            <td>Che</td>
+            <td>Mat</td>
+            <td class="special">SPORTS</td>
+        </tr>
+        <tr>
+            <td class="highlight"><b>Wednesday</b></td>
+            <td>Mat</td>
+            <td>Phy</td>
+            <td>Eng</td>
+            <td>Che</td>
+            <td colspan="3">LIBRARY</td>
+        </tr>
+        <tr>
+            <td class="highlight"><b>Thursday</b></td>
+            <td>Phy</td>
+            <td>Eng</td>
+            <td>Che</td>
+            <td colspan="3" class="special">LAB</td>
+            <td>Mat</td>
+        </tr>
+        <tr>
+            <td class="highlight"><b>Friday</b></td>
+            <td colspan="3" class="special">LAB</td>
+            <td>Mat</td>
+            <td>Che</td>
+            <td>Eng</td>
+            <td>Phy</td>
+        </tr>
+        <tr>
+            <td class="highlight"><b>Saturday</b></td>
+            <td>Eng</td>
+            <td>Che</td>
+            <td>Mat</td>
+            <td colspan="3">SEMINAR</td>
+            <td class="special">SPORTS</td>
+        </tr>
+    </table>*@
+
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
-                <th>Teacher</th>
-                <th>Subject</th>
+                
+                <th>Day</th>
+                @foreach (var subjectListSubjectViewModel in Model)
+                {
+                 <th>@subjectListSubjectViewModel.Timing</th>
+
+                }
                 <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
             @foreach (var subjectListSubjectViewModel in Model)
             {
                 <tr>
-                    <td>@subjectListSubjectViewModel.FirstName @subjectListSubjectViewModel.LastName</td>
-                    <td>@subjectListSubjectViewModel.Name</td>
+                    <td>@subjectListSubjectViewModel.DayName</td>
+                    @*<td>@subjectListSubjectViewModel.Timing</td>*@
+                <td>@subjectListSubjectViewModel.Name<br />@subjectListSubjectViewModel.FirstName @subjectListSubjectViewModel.LastName</td>
                     <td class="text-center action-btn-div">
                         <a class="btn btn-primary btn-sm" href="/Admin/EditLecture/@subjectListSubjectViewModel.SectionId"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                         <a class="btn btn-danger btn-sm" href="/Admin/DeleteLecture/@subjectListSubjectViewModel.SubjectId"><span class="glyphicon glyphicon-trash"></span> Delete</a>

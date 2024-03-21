@@ -37,6 +37,7 @@
                     <td>@ClassInchargeViewModel.FirstName @ClassInchargeViewModel.LastName</td>
 
                     <td class="text-center action-btn-div">
+                        <a class="btn btn-primary btn-sm" href="/Admin/ViewAssignment/@ClassInchargeViewModel.SectionId"><spna class="glyphicon glyphicon-paperclip"></spna> View Assignment/Quiz</a>
                         <a class="btn btn-success btn-sm" href="/Admin/ViewLectures/@ClassInchargeViewModel.SectionId"><spna class="glyphicon glyphicon-calendar"></spna> View Lectures</a>
                         <a class="btn btn-info btn-sm" href="/Admin/ViewClassroom/@ClassInchargeViewModel.SectionId"><spna class="glyphicon glyphicon-user"></spna> View Students</a>
                         @if (ClassInchargeViewModel.FirstName == "NA")

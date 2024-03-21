@@ -27,6 +27,10 @@ namespace Return.Models
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<ClassIncharge> ClassIncharges { get; set; }
         public DbSet<StudentClassEnrollment> StudentClassEnrollments { get; set; }
+        public DbSet<StudentAssignment> StudentAssignment { get; set; }
+        public DbSet<ClassAssignment> ClassAssignment { get; set; }
+        public DbSet<Day> days { get; set; }
+        public DbSet<Time> times { get; set; }
 
     }
 

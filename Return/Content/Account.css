@@ -1,0 +1,21 @@
+﻿body {
+    background-image: url('/images/login-reg2.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+h2{
+    color:white;
+}
+.footer {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    text-align:center;
+    align-items:center;
+    border-radius:8px;
+    padding:4px;
+    background-color: #222;
+}
+.sigin{
+    margin:0 auto;
+}

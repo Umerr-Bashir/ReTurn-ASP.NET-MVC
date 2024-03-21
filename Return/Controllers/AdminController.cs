@@ -219,6 +219,18 @@ namespace Return.Controllers
                 }
                 classInchargeViewModels.Add(civm);
 
+
+            }
+            string accessToken = "";
+            if (Request.Cookies.Get("user-access-token") != null)
+            {
+                accessToken = Request.Cookies.Get("user-access-token").Value;
+            }
+            User dbUser = db.Users.Where(x => x.AccessToken == accessToken && x.RoleId == 1).FirstOrDefault();
+
+            if (dbUser == null)
+            {
+                return RedirectToAction("Login", "Account");
             }
             return View(classInchargeViewModels);
         }
@@ -302,17 +314,22 @@ namespace Return.Controllers
         {
             List<Subject> subjects = db.Subjects.Where(x=>x.SectionId==Id).ToList();
             List<User> teachers = db.Users.Where(x => x.RoleId == 2).ToList();
+            List<Time> times = db.times.ToList();
 
             List<SubjectListSubjectViewModel> subjectListSubjectViewModels = new List<SubjectListSubjectViewModel>();
-
+            
             foreach (var subject in subjects)
             {
                 SubjectListSubjectViewModel slsvm = new SubjectListSubjectViewModel
                 {
+
                     Name = subject.Name,
+                    DayName = subject.Day.DayName,
+                    Timing = subject.Time.Timing,
                     TeacherId = subject.TeacherId,
                     SectionId = subject.Section.Id,
                     SubjectId = subject.Id
+                    
 
                 };
                 if (teachers != null)
@@ -334,6 +351,7 @@ namespace Return.Controllers
         [HttpGet]
         public ActionResult AddLecture()
         {
+            ViewBag.Day = db.days.ToList();
             ViewBag.User = db.Users.Where(x => x.RoleId == 2).ToList();
             ViewBag.Section = db.Sections.ToList();
             return View();
@@ -384,6 +402,61 @@ namespace Return.Controllers
             db.StudentClassEnrollments.Add(studentClassEnrollment);
             db.SaveChanges();
             return Redirect("/Admin/ManageStudents");
+        }
+        //=================================ViewAssignments================================
+        [HttpGet]
+        public ActionResult AddTime()
+        {
+            ViewBag.Time = db.times.ToList();
+            List<Time> times = db.times.ToList();
+            return View(times);
+        }
+        [HttpPost]
+        public ActionResult AddTime(Time time)
+        {
+            db.times.Add(time);
+            db.SaveChanges();
+            return Redirect("/Admin/AddTime");
+        }
+        public ActionResult DeleteTime(int id)
+        {
+            Time time = db.times.Where(x => x.Id == id).FirstOrDefault();
+            db.times.Remove(time);
+            db.SaveChanges();
+            return Redirect("/Admin/AddTime");
+        }
+        [HttpGet]
+        public ActionResult AddDay()
+        {
+            List<Day> days = db.days.ToList();
+            return View(days);
+        }
+        [HttpPost]
+        public ActionResult AddDay(Day day)
+        {
+            db.days.Add(day);
+            db.SaveChanges();
+            return Redirect("/Admin/AddDay");
+        }
+        public ActionResult DeleteDay(int id)
+        {
+            Day day = db.days.Where(x => x.Id == id).FirstOrDefault();
+            db.days.Remove(day);
+            db.SaveChanges();
+            return Redirect("/Admin/AddDay");
+        }
+        public ActionResult ViewAssignment(int id)
+        {
+            List<ClassAssignment> classAssignment = db.ClassAssignment.Where(x => x.SectionId == id).ToList();
+            return View(classAssignment);
+        }
+        public ActionResult DeleteAssignment(int id)
+        {
+            ClassAssignment classAssignment = db.ClassAssignment.Where(x => x.Id == id).FirstOrDefault();
+            db.ClassAssignment.Remove(classAssignment);
+            db.SaveChanges();
+
+            return Redirect("/Admin/ManageClassrooms/ViewAssignment");
         }
     }
 

@@ -1,10 +1,11 @@
 ﻿/*==============Admin=============*/
-.navbar-brand{
-    color:white !important;
-    font-family:'Times New Roman', Times, serif;
-    font-weight:500;
-    font-size:22px !important;
+.navbar-brand {
+    color: white !important;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+    font-size: 22px !important;
 }
+
 .navbar-left li a {
     padding: 18px 20px !important;
 }
@@ -12,35 +13,41 @@
 .navbar-right li a:first-child {
     padding: 18px 20px;
 }
+
 .log-out-btn {
     padding: 10px 13px !important;
     margin-top: 7px !important;
     color: white !important;
     background-color: #af1818 !important;
 }
-.log-out-btn:hover{
-    background-color:#9d1515 !important;
-}
+
+    .log-out-btn:hover {
+        background-color: #9d1515 !important;
+    }
+
 .panel-h {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.add-btn{
-    float:right;
+
+.add-btn {
+    float: right;
     padding: 0px 5px;
 }
-.action-btn{
-    padding:1px 14px;
-    margin:2px 9px;
+
+.action-btn {
+    padding: 1px 14px;
+    margin: 2px 9px;
 }
+
 .cursor-none {
     pointer-events: none;
 }
 
-.sections-li{
-    display:inline-block;
+.sections-li {
+    display: inline-block;
     background-color: #c9e2f4;
-    border:2px solid #12319c;
-    border-radius:5px;
+    border: 2px solid #12319c;
+    border-radius: 5px;
     padding: 5px 15px;
 }
 
@@ -64,5 +71,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-

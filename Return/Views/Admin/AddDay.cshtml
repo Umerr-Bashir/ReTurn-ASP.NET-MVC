@@ -1,0 +1,52 @@
+﻿@using Return.Models
+@model List<Day>
+
+
+@{
+    ViewBag.Title = "AddDay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Add Day</h2>
+
+<div class="container">
+    <div class="col-lg-4 col-lg-push-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-h">Add Class</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="/Admin/AddDay" method="post">
+                    <div class="text-center">
+                        <ul>
+                            @foreach (var item in Model)
+                            {
+                                <li class="sections-li"><b>@item.DayName</b><a href="/Admin/DeleteDay/@item.Id"> <span class="glyphicon glyphicon-trash"></span></a></li>
+
+                            }
+                        </ul>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="day">Day :</label>
+                        <div class="col-sm-9"> <input type="text" class="form-control" id="day" placeholder="Day" required name="DayName"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10 ">
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+

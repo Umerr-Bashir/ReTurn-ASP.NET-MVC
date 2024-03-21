@@ -100,6 +100,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Admin.css" />
+    <Content Include="Content\Account.css" />
+    <Content Include="Content\Teacher.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -119,7 +121,6 @@
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_TeacherLayout.cshtml" />
     <Content Include="Views\Shared\_StudentLayout.cshtml" />
@@ -208,14 +209,46 @@
     <Compile Include="Migrations\202401201510262_rmcid.designer.cs">
       <DependentUpon>202401201510262_rmcid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403201902476_StudentClass-Assignment.cs" />
+    <Compile Include="Migrations\202403201902476_StudentClass-Assignment.designer.cs">
+      <DependentUpon>202403201902476_StudentClass-Assignment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403201908360_updated-ClassAssignment.cs" />
+    <Compile Include="Migrations\202403201908360_updated-ClassAssignment.designer.cs">
+      <DependentUpon>202403201908360_updated-ClassAssignment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403201913384_reversed.cs" />
+    <Compile Include="Migrations\202403201913384_reversed.designer.cs">
+      <DependentUpon>202403201913384_reversed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403201935139_text.cs" />
+    <Compile Include="Migrations\202403201935139_text.designer.cs">
+      <DependentUpon>202403201935139_text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403211956154_subjectTable-updated.cs" />
+    <Compile Include="Migrations\202403211956154_subjectTable-updated.designer.cs">
+      <DependentUpon>202403211956154_subjectTable-updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403212021409_daytimeTableAdded.cs" />
+    <Compile Include="Migrations\202403212021409_daytimeTableAdded.designer.cs">
+      <DependentUpon>202403212021409_daytimeTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403212135396_intTostring.cs" />
+    <Compile Include="Migrations\202403212135396_intTostring.designer.cs">
+      <DependentUpon>202403212135396_intTostring.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\ClassAssignment.cs" />
     <Compile Include="Models\ClassIncharge.cs" />
+    <Compile Include="Models\Day.cs" />
     <Compile Include="Models\ReturnContext.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Section.cs" />
+    <Compile Include="Models\StudentAssignment.cs" />
     <Compile Include="Models\StudentClassEnrollment.cs" />
     <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Time.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ClassInchargeViewModel.cs" />
@@ -246,6 +279,15 @@
     <Content Include="Views\Admin\AddLecture.cshtml" />
     <Content Include="Views\Admin\AssignClassIncharge.cshtml" />
     <Content Include="Views\Admin\ViewEnrolledStudent.cshtml" />
+    <Content Include="Views\Shared\_AccountLayout.cshtml" />
+    <Content Include="Views\Teacher\Dashboard.cshtml" />
+    <Content Include="Views\Home\Admissions.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\ViewAssignment.cshtml" />
+    <Content Include="Views\Admin\AddTime.cshtml" />
+    <Content Include="Views\Admin\AddDay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -310,6 +352,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401201510262_rmcid.resx">
       <DependentUpon>202401201510262_rmcid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403201902476_StudentClass-Assignment.resx">
+      <DependentUpon>202403201902476_StudentClass-Assignment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403201908360_updated-ClassAssignment.resx">
+      <DependentUpon>202403201908360_updated-ClassAssignment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403201913384_reversed.resx">
+      <DependentUpon>202403201913384_reversed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403201935139_text.resx">
+      <DependentUpon>202403201935139_text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403211956154_subjectTable-updated.resx">
+      <DependentUpon>202403211956154_subjectTable-updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403212021409_daytimeTableAdded.resx">
+      <DependentUpon>202403212021409_daytimeTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403212135396_intTostring.resx">
+      <DependentUpon>202403212135396_intTostring.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

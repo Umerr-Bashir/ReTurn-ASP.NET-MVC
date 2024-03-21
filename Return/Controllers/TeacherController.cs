@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Return.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,11 @@ namespace Return.Controllers
 {
     public class TeacherController : Controller
     {
+        ReturnContext db = new ReturnContext();
         // GET: Teacher
-        public ActionResult TeacherDashboard()
+        public ActionResult Dashboard()
         {
+
             return View();
         }
     }

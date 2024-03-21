@@ -8,51 +8,69 @@ namespace Return.Controllers
 {
     public class AccountController : Controller
     {
-        ReturnContext db = new ReturnContext();
+        private readonly ReturnContext db = new ReturnContext();
         // GET: Account
         [HttpGet]
         public ActionResult Login()
         {
-            //string accessToken = "";
-            //if (Request.Cookies.Get("user-access-token") != null)
-            //{
-            //    accessToken = Request.Cookies.Get("user-access-token").Value;
-            //}
-            //User dbUser = db.users.Where(x => x.AccessToken == accessToken && (x.RoleId == 1 ||
-            //x.RoleId == 2|| x.RoleId == 3)).FirstOrDefault();
-            //if (dbUser.RoleId==1)
-            //{
-            //    return Redirect("/Admin/Dashboard");
-            //}
-            //else if (dbUser.RoleId==2)
-            //{
-            //    return Redirect("/Teacher/TeacherPanel");
-            //}
-            //else if (dbUser.RoleId==3)
-            //{
-            //    return Redirect("/Student/StudentPanel");
-            //}
-            //else
-            //{
-            //    return Redirect("/Account/Login");
-            //}
-
-            return View();
+            string accessToken = "";
+            if (Request.Cookies.Get("user-access-token") != null)
+            {
+                accessToken = Request.Cookies.Get("user-access-token").Value;
+                User dbUser = db.Users.Where(x => x.AccessToken == accessToken && (x.RoleId == 1 ||
+            x.RoleId == 2 || x.RoleId == 3)).FirstOrDefault();
+                if (dbUser.RoleId == 1)
+                {
+                    return Redirect("/Admin/Dashboard");
+                }
+                else if (dbUser.RoleId == 2)
+                {
+                    return Redirect("/Teacher/Dashboard");
+                }
+                else if (dbUser.RoleId == 3)
+                {
+                    return Redirect("/Student/Dashboard");
+                }
+                else
+                {
+                    return Redirect("/Account/Login");
+                }
+            }
+             return View();
         }
         [HttpPost]
         public ActionResult Login(User user)
         {
-            User dbUser = db.Users.Where(x=>x.Email==user.Email && x.Password==user.Password).FirstOrDefault();
-            if (dbUser==null)
+            User dbUser = db.Users.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
+            if (dbUser == null)
             {
-                ViewBag.error = "Your Email or Password is Incorrect";return View();
+                ViewBag.error = "Your Email or Password is Incorrect"; return View();
             }
             HttpCookie mycookie = new HttpCookie("user-access-token");
             mycookie.Value = dbUser.AccessToken;
             mycookie.Expires = DateTime.UtcNow.AddDays(15).AddHours(5);
             Response.Cookies.Remove("user-access-token");
             Response.Cookies.Add(mycookie);
-            return Redirect("/Admin/Dashboard");
+
+            dbUser = db.Users.Where(x => x.AccessToken == mycookie.Value && (x.RoleId == 1 ||
+            x.RoleId == 2 || x.RoleId == 3)).FirstOrDefault();
+            if (dbUser.RoleId == 1)
+            {
+                return Redirect("/Admin/Dashboard");
+            }
+            else if (dbUser.RoleId == 2)
+            {
+                return Redirect("/Teacher/Dashboard");
+            }
+            else if (dbUser.RoleId == 3)
+            {
+                return Redirect("/Student/Dashboard");
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+            return View();
         }
         [HttpGet]
         public ActionResult Register()
@@ -70,14 +88,15 @@ namespace Return.Controllers
             mycookie.Value = user.AccessToken;
             mycookie.Expires = DateTime.UtcNow.AddDays(15).AddHours(5);
             Response.Cookies.Remove("user-access-token");
-            Response.Cookies.Add(mycookie); 
-            return Redirect("/Admin/Dashboard");
+            Response.Cookies.Add(mycookie);
+            return Redirect("/Student/StudentPanel");
         }
-        public ActionResult Logout(User user)
+        public ActionResult Logout()
         {
             if (Request.Cookies["user-access-token"] != null)
-            {Response.Cookies["user-access-token"].Expires = DateTime.UtcNow.AddHours(5).AddDays(-1);
-             return Redirect("/Account/Login");
+            {
+                Response.Cookies["user-access-token"].Expires = DateTime.UtcNow.AddHours(5).AddDays(-1);
+                return Redirect("/Account/Login");
             }
             return View();
         }
